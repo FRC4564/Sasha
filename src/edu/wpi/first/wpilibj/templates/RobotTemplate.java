@@ -54,7 +54,8 @@ public class RobotTemplate extends SimpleRobot {
     public static final int JB_SOLENOID_3 = 5;
     
     // Left Joystick Buttons
-    public static final int JB_TUBE_1 = 1;
+    public static final int JB_TUBE_1 = 7;
+    public static final int JB_TUBE_2 = 8;
     // PWM assingments
     public static final int PWM_DRIVE_FR = 1;
     public static final int PWM_DRIVE_RR = 2;
@@ -118,9 +119,11 @@ public class RobotTemplate extends SimpleRobot {
     SpeedController thrower = new Jaguar(PWM_THROWER);
     SpeedController cam     = new Jaguar(PWM_CAM);
     Relay winch = new Relay(RLY_WINCH);
+    //winch.setDirection(Relay.Direction.kBothDirections);
+    
+    //Relays for t-shirt tube launchers
     Relay tube1 = new Relay(RLY_TUBE_1);
     Relay tube2 = new Relay(RLY_TUBE_2);
-    //winch.setDirection(Relay.Direction.kBothDirections);
     
     DigitalInput upperLimit = new DigitalInput(DIO_WINCH_UPPER_LIMIT);
     DigitalInput lowerLimit = new DigitalInput(DIO_WINCH_LOWER_LIMIT);
@@ -170,6 +173,14 @@ public class RobotTemplate extends SimpleRobot {
         }
     }
      
+     public void fireTube2() {
+        if (leftstick.getRawButton(JB_TUBE_2)){
+            tube2.set(Relay.Value.kForward);
+        } else {
+            tube2.set(Relay.Value.kOff);
+        }
+    }
+
      
      /** If limit switch is clear, move winch at speed provided. Use SPD_WINCH_*
      * constants, which incorporate speed and direction for motor.
@@ -234,8 +245,8 @@ public class RobotTemplate extends SimpleRobot {
             thrower.set(SPD_THROWER_SLOW);
         } else if (rightstick.getRawButton(JB_THROWER_FAST)) {
             //thrower.set(SPD_THROWER_FAST);
-            //thrower.set(((-1.0 * rightstick.getZ()) + 1.0 )/ 2.0);
-            motorVal = (potentiometer.getValue() - 12) / 956.0;
+            thrower.set(((-1.0 * rightstick.getZ()) + 1.0 )/ 2.0);
+            //motorVal = (potentiometer.getValue() - 12) / 956.0;
         } else {
             thrower.set(0);
         }
@@ -324,7 +335,7 @@ public class RobotTemplate extends SimpleRobot {
             solenoidTest();
             encoderTest();
             fireTube1();
-            
+            fireTube2();
             Timer.delay(LOOP_DELAY_SECS);
         }
     }
