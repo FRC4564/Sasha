@@ -54,8 +54,8 @@ public class RobotTemplate extends SimpleRobot {
     public static final int JB_SOLENOID_3 = 5;
     
     // Left Joystick Buttons
-    public static final int JB_TUBE_1 = 7;
-    public static final int JB_TUBE_2 = 8;
+    public static final int JB_TUBE_LEFT = 8;
+    public static final int JB_TUBE_RIGHT = 9;
     // PWM assingments
     public static final int PWM_DRIVE_FR = 1;
     public static final int PWM_DRIVE_RR = 2;
@@ -66,8 +66,8 @@ public class RobotTemplate extends SimpleRobot {
 
     public static final int RLY_WINCH    = 8;
     public static final int RLY_CMP_PUMP = 7;
-    public static final int RLY_TUBE_1 = 5;
-    public static final int RLY_TUBE_2 = 6;
+    public static final int RLY_TUBE_LEFT = 5;
+    public static final int RLY_TUBE_RIGHT = 6;
     
     // Motor speed constants
     public static final double SPD_THROWER_FAST = 1.0;
@@ -122,8 +122,8 @@ public class RobotTemplate extends SimpleRobot {
     //winch.setDirection(Relay.Direction.kBothDirections);
     
     //Relays for t-shirt tube launchers
-    Relay tube1 = new Relay(RLY_TUBE_1);
-    Relay tube2 = new Relay(RLY_TUBE_2);
+    Relay tube1 = new Relay(RLY_TUBE_LEFT);
+    Relay tube2 = new Relay(RLY_TUBE_RIGHT);
     
     DigitalInput upperLimit = new DigitalInput(DIO_WINCH_UPPER_LIMIT);
     DigitalInput lowerLimit = new DigitalInput(DIO_WINCH_LOWER_LIMIT);
@@ -166,7 +166,7 @@ public class RobotTemplate extends SimpleRobot {
     
     
      public void fireTube1() {
-        if (leftstick.getRawButton(JB_TUBE_1)){
+        if (leftstick.getRawButton(JB_TUBE_LEFT)){
             tube1.set(Relay.Value.kForward);
         } else {
             tube1.set(Relay.Value.kOff);
@@ -174,7 +174,7 @@ public class RobotTemplate extends SimpleRobot {
     }
      
      public void fireTube2() {
-        if (leftstick.getRawButton(JB_TUBE_2)){
+        if (leftstick.getRawButton(JB_TUBE_RIGHT)){
             tube2.set(Relay.Value.kForward);
         } else {
             tube2.set(Relay.Value.kOff);
