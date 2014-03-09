@@ -225,7 +225,8 @@ public class RobotTemplate extends SimpleRobot {
                       && winchDown == false
                       && lowerLimit.get() != WINCH_LIMIT_REACHED) {
                 winchDown = true;
-                winchTimer = ds.getAnalogIn(1);
+                //winchTimer = ds.getAnalogIn(1);
+                winchTimer = 1;
             } else if (winchDown == true
                       && winchTimer > 0
                       && lowerLimit.get() != WINCH_LIMIT_REACHED) {
